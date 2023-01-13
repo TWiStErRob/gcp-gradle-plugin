@@ -46,7 +46,11 @@ public class ShowConfigurationTask extends DefaultTask {
     this.extensionId = extensionId;
   }
 
-  /** Task entrypoint : Log out configuration to lifecyle. */
+  /**
+   * Task entrypoint: Log out configuration to lifecyle.
+   *
+   * @throws IllegalAccessException if reflection fails, so the Gradle task fails.
+   */
   @TaskAction
   public void showConfiguration() throws IllegalAccessException {
     Object extensionInstance = getProject().getExtensions().getByName(extensionId);

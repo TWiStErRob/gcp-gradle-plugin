@@ -43,7 +43,11 @@ public class StageStandardTask extends DefaultTask {
     this.appCfg = appCfg;
   }
 
-  /** Task entrypoint : stage the standard app. */
+  /**
+   * Task entrypoint: stage the standard app.
+   *
+   * @throws AppEngineException if gcloud command fails, so the Gradle task fails.
+   */
   @TaskAction
   public void stageAction() throws AppEngineException {
     getProject().delete(stageStandardExtension.getStagingDirectory());

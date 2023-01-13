@@ -38,7 +38,11 @@ public class DevAppServerRunTask extends DefaultTask {
     this.devServers = devServers;
   }
 
-  /** Task entrypoint : run the devappserver (blocking). */
+  /**
+   * Task entrypoint: run the devappserver (blocking).
+   *
+   * @throws AppEngineException if gcloud command fails, so the Gradle task fails.
+   */
   @TaskAction
   public void runAction() throws AppEngineException, ProjectConfigurationException {
     devServers

@@ -29,7 +29,11 @@ public class CloudSdkLoginTask extends GcloudTask {
     this.gcloud = gcloud;
   }
 
-  /** Login by delegating to gcloud auth login. */
+  /**
+   * Login by delegating to gcloud auth login.
+   *
+   * @throws AppEngineException if gcloud command fails, so the Gradle task fails.
+   */
   @TaskAction
   public void login() throws AppEngineException {
     gcloud.newAuth(CloudSdkOperations.getDefaultHandler(getLogger())).login();

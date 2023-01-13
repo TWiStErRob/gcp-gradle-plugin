@@ -31,7 +31,13 @@ public class ManagedCloudSdkFactory {
     this.version = version;
   }
 
-  /** Build a new ManagedCloudSdk from a given version. */
+  /**
+   * Build a new ManagedCloudSdk from a given version.
+   *
+   * @throws UnsupportedOsException if operating system is not supported by the managed SDK.
+   * @throws BadCloudSdkVersionException if managed SDK doesn't support the specific {@link
+   *     #version}.
+   */
   public ManagedCloudSdk newManagedSdk()
       throws UnsupportedOsException, BadCloudSdkVersionException {
     if (Strings.isNullOrEmpty(version)) {

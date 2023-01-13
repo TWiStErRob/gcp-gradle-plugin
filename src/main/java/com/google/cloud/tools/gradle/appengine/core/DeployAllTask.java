@@ -46,7 +46,11 @@ public class DeployAllTask extends GcloudTask {
     this.stageDirectory = stageDirectory;
   }
 
-  /** Task Entrypoint : Deploys the app and all of its config files. */
+  /**
+   * Task entrypoint: Deploys the app and all of its config files.
+   *
+   * @throws AppEngineException if gcloud command fails, so the Gradle task fails.
+   */
   @TaskAction
   public void deployAllAction() throws AppEngineException {
     List<Path> deployables = new ArrayList<>();

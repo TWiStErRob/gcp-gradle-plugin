@@ -37,7 +37,11 @@ public class StageAppYamlTask extends DefaultTask {
     this.appYamlExtension = stagingConfig;
   }
 
-  /** Task entrypoint : Stage the app.yaml based application. */
+  /**
+   * Task entrypoint: Stage the app.yaml based application.
+   *
+   * @throws AppEngineException if gcloud command fails, so the Gradle task fails.
+   */
   @TaskAction
   public void stageAction() throws AppEngineException {
     getProject().delete(appYamlExtension.getStagingDirectory());

@@ -38,7 +38,7 @@ public class DevAppServerStopTask extends DefaultTask {
     this.devServers = devServers;
   }
 
-  /** Task entrypoint : Stop the dev appserver (get StopConfiguration from helper). */
+  /** Task entrypoint: Stop the dev appserver (get StopConfiguration from helper). */
   @TaskAction
   public void stopAction() {
     DevServer server =

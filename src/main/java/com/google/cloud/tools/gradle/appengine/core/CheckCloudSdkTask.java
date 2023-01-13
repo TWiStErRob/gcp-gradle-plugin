@@ -45,7 +45,15 @@ public class CheckCloudSdkTask extends DefaultTask {
     this.requiresAppEngineJava = requiresAppEngineJava;
   }
 
-  /** Task entrypoint : Verify Cloud SDK installation. */
+  /**
+   * Task entrypoint: Verify Cloud SDK installation.
+   *
+   * @throws CloudSdkNotFoundException if gcloud validation fails, so the Gradle task fails.
+   * @throws CloudSdkVersionFileException if gcloud validation fails, so the Gradle task fails.
+   * @throws CloudSdkOutOfDateException if gcloud validation fails, so the Gradle task fails.
+   * @throws AppEngineJavaComponentsNotInstalledException if gcloud validation fails, so the Gradle
+   *     task fails.
+   */
   @TaskAction
   public void checkCloudSdkAction()
       throws CloudSdkNotFoundException, CloudSdkVersionFileException, CloudSdkOutOfDateException,

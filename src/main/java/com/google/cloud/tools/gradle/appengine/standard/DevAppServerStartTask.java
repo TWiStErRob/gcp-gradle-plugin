@@ -59,7 +59,13 @@ public class DevAppServerStartTask extends DefaultTask {
     return devAppServerLoggingDir;
   }
 
-  /** Task entrypoint : start the dev appserver (non-blocking). */
+  /**
+   * Task entrypoint: start the dev appserver (non-blocking).
+   *
+   * @throws AppEngineException if gcloud command fails, so the Gradle task fails.
+   * @throws IOException if there's a problem with {@link #devAppServerLoggingDir}, so the Gradle
+   *     task fails.
+   */
   @TaskAction
   public void startAction() throws AppEngineException, IOException {
 

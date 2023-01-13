@@ -57,7 +57,17 @@ public class DownloadCloudSdkTask extends DefaultTask {
     return ImmutableList.copyOf(components);
   }
 
-  /** Task entrypoint : Download/update Cloud SDK. */
+  /**
+   * Task entrypoint: Download/update Cloud SDK.
+   *
+   * @throws ManagedSdkVerificationException if gcloud command fails, so the Gradle task fails.
+   * @throws ManagedSdkVersionMismatchException if SDK installation fails, so the Gradle task fails.
+   * @throws InterruptedException if gcloud command fails, so the Gradle task fails.
+   * @throws CommandExecutionException if gcloud command fails, so the Gradle task fails.
+   * @throws SdkInstallerException if SDK installation fails, so the Gradle task fails.
+   * @throws CommandExitException if gcloud command fails, so the Gradle task fails.
+   * @throws IOException if SDK installation fails, so the Gradle task fails.
+   */
   @TaskAction
   public void downloadCloudSdkAction()
       throws ManagedSdkVerificationException, ManagedSdkVersionMismatchException,

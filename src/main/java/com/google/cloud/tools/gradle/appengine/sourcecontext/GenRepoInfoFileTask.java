@@ -43,7 +43,11 @@ public class GenRepoInfoFileTask extends DefaultTask {
     this.gcloud = gcloud;
   }
 
-  /** Task entrypoint : generate source context file. */
+  /**
+   * Task entrypoint: generate source context file.
+   *
+   * @throws AppEngineException if gcloud command fails, so the Gradle task fails.
+   */
   @TaskAction
   public void generateRepositoryInfoFile() throws AppEngineException {
     gcloud

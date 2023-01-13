@@ -43,7 +43,11 @@ public class DeployTask extends GcloudTask {
     this.gcloud = gcloud;
   }
 
-  /** Task Entrypoint : DeployExtension application (via app.yaml). */
+  /**
+   * Task entrypoint: DeployExtension application (via app.yaml).
+   *
+   * @throws AppEngineException if gcloud command fails, so the Gradle task fails.
+   */
   @TaskAction
   public void deployAction() throws AppEngineException {
     DeployConfiguration deployConfig =

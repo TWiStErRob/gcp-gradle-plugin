@@ -35,7 +35,11 @@ public class DeployCronTask extends GcloudTask {
     this.gcloud = gcloud;
   }
 
-  /** Task Entrypoint : deploy cron.yaml. */
+  /**
+   * Task entrypoint: deploy cron.yaml.
+   *
+   * @throws AppEngineException if gcloud command fails, so the Gradle task fails.
+   */
   @TaskAction
   public void deployAction() throws AppEngineException {
     gcloud
