@@ -49,7 +49,11 @@ public class AppEngineWebXml {
     return new AppEngineWebXml(appengineWebXml);
   }
 
-  /** Check if vm = true. */
+  /**
+   * Check the value of the {@code vm} element.
+   *
+   * @return {@code true} if {@code vm = true} in the XML configuration.
+   */
   public boolean isVm() {
     try {
       XPath xpath = XPathFactory.newInstance().newXPath();

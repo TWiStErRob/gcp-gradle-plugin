@@ -30,6 +30,8 @@ public class ExtensionUtil {
 
   /**
    * Get an extension by it's path, potentially will throw all kinds of exceptions. Be very careful.
+   *
+   * @return the value of the extension at the leaf
    */
   @SuppressWarnings("unchecked")
   public <T> T get(String... path) {

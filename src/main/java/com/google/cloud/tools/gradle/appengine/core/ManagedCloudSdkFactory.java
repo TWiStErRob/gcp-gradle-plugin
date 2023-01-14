@@ -34,6 +34,7 @@ public class ManagedCloudSdkFactory {
   /**
    * Build a new ManagedCloudSdk from a given version.
    *
+   * @return a new {@link ManagedCloudSdk} with the default or specified {@link #version}.
    * @throws UnsupportedOsException if operating system is not supported by the managed SDK.
    * @throws BadCloudSdkVersionException if managed SDK doesn't support the specific {@link
    *     #version}.

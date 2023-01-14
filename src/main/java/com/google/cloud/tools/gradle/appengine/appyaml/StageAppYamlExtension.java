@@ -83,7 +83,11 @@ public class StageAppYamlExtension {
     this.stagingDirectory = project.file(stagingDirectory);
   }
 
-  /** This method is purely for incremental build calculations. */
+  /**
+   * This method is purely for incremental build calculations.
+   *
+   * @return the extra files used in the build
+   */
   @Optional
   @InputFiles
   public FileCollection getExtraFilesDirectoriesAsInputFiles() {

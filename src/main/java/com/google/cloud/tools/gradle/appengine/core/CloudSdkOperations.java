@@ -66,7 +66,9 @@ public class CloudSdkOperations {
 
   /**
    * DevServers isn't initialized at construction time, because we optionally download the appengine
-   * component for appengine-web.xml based applications
+   * component for appengine-web.xml based applications.
+   *
+   * @return the {@link DevServers} factory.
    */
   public DevServers getDevServers() {
     return DevServers.builder(cloudSdk).build();
@@ -74,13 +76,19 @@ public class CloudSdkOperations {
 
   /**
    * AppCfg isn't initialized at construction time, because we optionally download the appengine
-   * component for appengine-web.xml based applications
+   * component for appengine-web.xml based applications.
+   *
+   * @return the {@link AppCfg} factory.
    */
   public AppCfg getAppcfg() {
     return AppCfg.builder(cloudSdk).build();
   }
 
-  /** Create a return a new default configured process handler. */
+  /**
+   * Create a return a new default configured process handler.
+   *
+   * @return a default handler for the specified {@code logger}
+   */
   public static ProcessHandler getDefaultHandler(Logger logger) {
     return LegacyProcessHandler.builder()
         .addStdErrLineListener(logger::lifecycle)

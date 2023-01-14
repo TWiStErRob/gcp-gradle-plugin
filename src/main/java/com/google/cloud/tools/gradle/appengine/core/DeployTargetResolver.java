@@ -57,6 +57,8 @@ public class DeployTargetResolver {
   /**
    * Process user configuration of "projectId". If set to GCLOUD_CONFIG then read from gcloud's
    * global state. If set but not a keyword then just return the set value.
+   *
+   * @return what cloud project should be used for deployment
    */
   public String getProject(String configString) {
     if (configString == null
@@ -85,6 +87,8 @@ public class DeployTargetResolver {
   /**
    * Process user configuration of "version". If set to GCLOUD_CONFIG then allow gcloud to generate
    * a version. If set but not a keyword then just return the set value.
+   *
+   * @return what cloud project version should be used for deployment
    */
   public String getVersion(String configString) {
     if (configString == null

@@ -130,6 +130,8 @@ public class RunExtension {
   /**
    * Returns the appengine service directory for this project and modifies the task dependencies of
    * run/start to ensure {@code serviceProject} is built first.
+   *
+   * @return the output directory of the {@code serviceProject}
    */
   public File projectAsService(String serviceProject) {
     return projectAsService(project.getRootProject().project(serviceProject));
@@ -138,6 +140,8 @@ public class RunExtension {
   /**
    * Returns the appengine service directory for this project and modifies the task dependencies of
    * run/start to ensure {@code serviceProject} is built first.
+   *
+   * @return the output directory of the {@code serviceProject}
    */
   public File projectAsService(Project serviceProject) {
     if (!serviceProject.equals(project)) {
