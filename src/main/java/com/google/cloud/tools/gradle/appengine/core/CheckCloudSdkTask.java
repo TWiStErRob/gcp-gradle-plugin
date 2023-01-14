@@ -27,6 +27,7 @@ import org.gradle.api.DefaultTask;
 import org.gradle.api.GradleException;
 import org.gradle.api.tasks.TaskAction;
 
+/** Task to verify cloud SDK installation is ready to use. */
 public class CheckCloudSdkTask extends DefaultTask {
 
   private CloudSdk cloudSdk;

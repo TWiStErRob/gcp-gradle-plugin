@@ -17,6 +17,7 @@
 
 package com.google.cloud.tools.gradle.appengine.core;
 
+/** Core extension properties to share configuration between plugins. */
 public interface AppEngineCoreExtensionProperties {
   ToolsExtension getTools();
 

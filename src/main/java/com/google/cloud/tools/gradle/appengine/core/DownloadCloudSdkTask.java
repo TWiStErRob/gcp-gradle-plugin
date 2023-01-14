@@ -38,6 +38,7 @@ import org.gradle.api.GradleException;
 import org.gradle.api.tasks.Internal;
 import org.gradle.api.tasks.TaskAction;
 
+/** Task to download Cloud SDK and install necessary components. */
 public class DownloadCloudSdkTask extends DefaultTask {
 
   private ManagedCloudSdk managedCloudSdk;

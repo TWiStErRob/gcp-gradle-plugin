@@ -28,6 +28,7 @@ import java.util.List;
 import org.gradle.api.GradleException;
 import org.gradle.api.tasks.TaskAction;
 
+/** Task to deploy app and all configuration files (cron, dispatch, dos, datastore index, queue). */
 public class DeployAllTask extends GcloudTask {
 
   private DeployExtension deployExtension;

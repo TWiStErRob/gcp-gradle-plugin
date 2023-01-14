@@ -21,6 +21,7 @@ import com.google.cloud.tools.appengine.AppEngineException;
 import com.google.cloud.tools.appengine.operations.Gcloud;
 import org.gradle.api.tasks.TaskAction;
 
+/** Task to authenticate in the cloud SDK installation. */
 public class CloudSdkLoginTask extends GcloudTask {
 
   private Gcloud gcloud;

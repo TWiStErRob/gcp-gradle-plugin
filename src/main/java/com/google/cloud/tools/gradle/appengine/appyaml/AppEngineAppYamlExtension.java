@@ -25,6 +25,7 @@ import org.gradle.api.Action;
 import org.gradle.api.Project;
 import org.gradle.api.plugins.ExtensionAware;
 
+/** Extension element to define all configurations for App Engine app.yaml based projects. */
 public class AppEngineAppYamlExtension implements AppEngineCoreExtensionProperties {
   @InternalProperty private static final String TOOLS_EXT = "tools";
   @InternalProperty private static final String DEPLOY_EXT = "deploy";

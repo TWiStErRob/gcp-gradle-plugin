@@ -23,6 +23,7 @@ import com.google.cloud.tools.managedcloudsdk.UnsupportedOsException;
 import com.google.cloud.tools.managedcloudsdk.Version;
 import com.google.common.base.Strings;
 
+/** Factory for creating {@link ManagedCloudSdk} instances. */
 public class ManagedCloudSdkFactory {
 
   private String version;

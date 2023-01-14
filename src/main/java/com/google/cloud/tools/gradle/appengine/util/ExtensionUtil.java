@@ -20,6 +20,7 @@ package com.google.cloud.tools.gradle.appengine.util;
 import org.gradle.api.plugins.ExtensionAware;
 import org.gradle.api.plugins.ExtensionContainer;
 
+/** Utility class for operating on Gradle extensions. */
 public class ExtensionUtil {
 
   private final ExtensionAware searchRoot;

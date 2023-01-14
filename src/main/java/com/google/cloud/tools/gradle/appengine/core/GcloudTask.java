@@ -20,6 +20,7 @@ package com.google.cloud.tools.gradle.appengine.core;
 import com.google.cloud.tools.appengine.operations.Gcloud;
 import org.gradle.api.DefaultTask;
 
+/** Base task for all tasks that need {@link Gcloud} access. */
 public abstract class GcloudTask extends DefaultTask {
   public abstract void setGcloud(Gcloud gcloud);
 }

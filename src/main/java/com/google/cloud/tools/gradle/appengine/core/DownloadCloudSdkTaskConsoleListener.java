@@ -21,6 +21,10 @@ import com.google.cloud.tools.managedcloudsdk.ConsoleListener;
 import org.gradle.api.Project;
 import org.gradle.api.logging.LogLevel;
 
+/**
+ * Console listener for the {@link DownloadCloudSdkTask Cloud SDK download task}, forwarding output
+ * to Gradle console when possible.
+ */
 public class DownloadCloudSdkTaskConsoleListener implements ConsoleListener {
   private Project project;
 
