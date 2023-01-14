@@ -56,7 +56,15 @@ public class AppEngineCorePluginConfiguration {
   private boolean requiresAppEngineJava;
   private String taskGroup;
 
-  /** Configure core tasks for appengine app.yaml and appengine-web.xml based project plugins. */
+  /**
+   * Configure core tasks for appengine app.yaml and appengine-web.xml based project plugins.
+   *
+   * @param project to apply this plugin to
+   * @param appEngineCoreExtensionProperties the extension hierarchy that will be used for
+   *     configuring the plugin
+   * @param taskGroup Gradle task group which will be set on all tasks created by this plugin
+   * @param requiresAppEngineJava whether it is necessary to use the AppEngine Java SDK
+   */
   public void configureCoreProperties(
       Project project,
       AppEngineCoreExtensionProperties appEngineCoreExtensionProperties,

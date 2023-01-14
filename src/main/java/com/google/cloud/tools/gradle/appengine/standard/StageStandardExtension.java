@@ -45,7 +45,11 @@ public class StageStandardExtension {
   private Boolean disableJarJsps;
   private String runtime;
 
-  /** Constuctor. */
+  /**
+   * Constuctor.
+   *
+   * @param project used to resolve files later in the lifecycle.
+   */
   public StageStandardExtension(Project project) {
     this.project = project;
   }

@@ -31,6 +31,9 @@ public class ExtensionUtil {
   /**
    * Get an extension by it's path, potentially will throw all kinds of exceptions. Be very careful.
    *
+   * @param path individual extension names leading to the extension you want to access.
+   * @param <T> the final type of the deeply nested extension, convenience unchecked conversion, be
+   *     careful.
    * @return the value of the extension at the leaf
    */
   @SuppressWarnings("unchecked")

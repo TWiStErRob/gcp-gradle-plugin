@@ -32,7 +32,11 @@ public class GenRepoInfoFileExtension {
   private File outputDirectory;
   private File sourceDirectory;
 
-  /** Constructor. */
+  /**
+   * Constructor.
+   *
+   * @param project used to resolve files later in the lifecycle.
+   */
   public GenRepoInfoFileExtension(Project project) {
     this.project = project;
   }

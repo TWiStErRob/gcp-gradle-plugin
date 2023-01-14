@@ -34,7 +34,11 @@ public class AppEngineAppYamlExtension implements AppEngineCoreExtensionProperti
   @InternalProperty private DeployExtension deploy;
   @InternalProperty private StageAppYamlExtension stage;
 
-  /** Create nested configuration blocks as Extensions. */
+  /**
+   * Create nested configuration blocks as Extensions.
+   *
+   * @param project the {@link Project} to inject into the sub-extensions.
+   */
   public void createSubExtensions(Project project) {
     tools =
         ((ExtensionAware) this).getExtensions().create(TOOLS_EXT, ToolsExtension.class, project);

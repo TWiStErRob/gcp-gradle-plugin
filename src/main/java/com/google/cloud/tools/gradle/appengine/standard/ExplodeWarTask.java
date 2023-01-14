@@ -31,8 +31,10 @@ public class ExplodeWarTask extends Sync {
   }
 
   /**
-   * Sets the output directory of Sync Task and preserves the setting so it can be recovered later
+   * Sets the output directory of Sync Task and preserves the setting, so it can be recovered later
    * via getter.
+   *
+   * @param explodedAppDirectory the output directory of explode task.
    */
   public void setExplodedAppDirectory(File explodedAppDirectory) {
     this.explodedAppDirectory = explodedAppDirectory;

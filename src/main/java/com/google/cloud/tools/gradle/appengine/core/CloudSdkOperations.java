@@ -87,6 +87,7 @@ public class CloudSdkOperations {
   /**
    * Create a return a new default configured process handler.
    *
+   * @param logger the Gradle logger to use for process output and error streams.
    * @return a default handler for the specified {@code logger}
    */
   public static ProcessHandler getDefaultHandler(Logger logger) {
