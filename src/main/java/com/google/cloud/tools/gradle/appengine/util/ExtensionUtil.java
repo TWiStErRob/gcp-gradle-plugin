@@ -29,7 +29,7 @@ public class ExtensionUtil {
   }
 
   /**
-   * Get an extension by it's path, potentially will throw all kinds of exceptions. Be very careful.
+   * Get an extension by its path, potentially will throw all kinds of exceptions. Be very careful.
    *
    * @param path individual extension names leading to the extension you want to access.
    * @param <T> the final type of the deeply nested extension, convenience unchecked conversion, be
