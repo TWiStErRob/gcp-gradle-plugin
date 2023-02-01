@@ -45,10 +45,10 @@ dependencies {
   implementation(gradleApi())
   api("com.google.cloud.tools:appengine-plugins-core:0.9.9")
 
-  testImplementation("commons-io:commons-io:2.4")
-  testImplementation("junit:junit:4.12")
-  testImplementation("org.hamcrest:hamcrest-library:1.3")
-  testImplementation("org.mockito:mockito-core:2.23.4")
+  testImplementation("commons-io:commons-io:2.11.0")
+  testImplementation("junit:junit:4.13.2")
+  testImplementation("org.hamcrest:hamcrest-library:2.2")
+  testImplementation("org.mockito:mockito-core:4.11.0")
 }
 
 
@@ -192,11 +192,16 @@ googleJavaFormat {
 tasks.check.configure {
   dependsOn(tasks.verifyGoogleJavaFormat)
 }
+tasks.withType<Checkstyle>().configureEach {
+  // Set up a soft dependency so that verifyGoogleFormat suggests running googleJavaFormat,
+  // before devs start fixing individual checkstyle violations manually.
+  shouldRunAfter(tasks.verifyGoogleJavaFormat)
+}
 // to auto-format run ./gradlew googleJavaFormat
 
 checkstyle {
-  toolVersion = "8.18"
-  // get the google_checks.xml file from the actual tool we"re invoking)
+  toolVersion = "8.37"
+  // Get the google_checks.xml file from the actual tool we're invoking.
   config = resources.text.fromArchiveEntry(configurations.checkstyle.get().files.first(), "google_checks.xml")
   maxErrors = 0
   maxWarnings = 0
@@ -208,7 +213,7 @@ checkstyle {
 
 /* TEST COVERAGE */
 jacoco {
-  toolVersion = "0.8.6"
+  toolVersion = "0.8.8"
 }
 
 tasks.jacocoTestReport {
