@@ -24,6 +24,10 @@ import java.util.stream.Collectors;
 /** Utility class for null-safe conversions. */
 public class NullSafe {
 
+  private NullSafe() {
+    // Prevent instantiation and extension.
+  }
+
   public static <S, R> R convert(S source, Function<S, R> converter) {
     return (source == null) ? null : converter.apply(source);
   }
