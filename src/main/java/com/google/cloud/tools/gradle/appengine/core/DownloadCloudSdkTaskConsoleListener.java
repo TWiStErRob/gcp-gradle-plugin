@@ -20,12 +20,13 @@ package com.google.cloud.tools.gradle.appengine.core;
 import com.google.cloud.tools.managedcloudsdk.ConsoleListener;
 import org.gradle.api.Project;
 import org.gradle.api.logging.LogLevel;
+import org.gradle.api.logging.Logger;
 
 public class DownloadCloudSdkTaskConsoleListener implements ConsoleListener {
-  private Project project;
+  private Logger logger;
 
-  public DownloadCloudSdkTaskConsoleListener(Project project) {
-    this.project = project;
+  public DownloadCloudSdkTaskConsoleListener(Logger logger) {
+    this.logger = logger;
   }
 
   @Override
@@ -36,7 +37,7 @@ public class DownloadCloudSdkTaskConsoleListener implements ConsoleListener {
     // is that Gradle redirects standard output to its logging system at the QUIET level. So, in
     // order to print to LIFECYCLE without adding a newline, we just check that our desired level
     // is enabled before trying to print.
-    if (project.getLogger().isEnabled(LogLevel.LIFECYCLE)) {
+    if (logger.isEnabled(LogLevel.LIFECYCLE)) {
       System.out.print(rawString);
     }
   }

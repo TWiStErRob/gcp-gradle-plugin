@@ -69,7 +69,7 @@ public class DownloadCloudSdkTask extends DefaultTask {
     }
 
     ProgressListener progressListener = new NoOpProgressListener();
-    ConsoleListener consoleListener = new DownloadCloudSdkTaskConsoleListener(getProject());
+    ConsoleListener consoleListener = new DownloadCloudSdkTaskConsoleListener(getLogger());
 
     // Install sdk if not installed
     if (!managedCloudSdk.isInstalled()) {

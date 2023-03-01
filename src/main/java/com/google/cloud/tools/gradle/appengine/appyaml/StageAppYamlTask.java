@@ -19,12 +19,17 @@ package com.google.cloud.tools.gradle.appengine.appyaml;
 
 import com.google.cloud.tools.appengine.AppEngineException;
 import com.google.cloud.tools.appengine.operations.AppYamlProjectStaging;
+import javax.inject.Inject;
 import org.gradle.api.DefaultTask;
+import org.gradle.api.internal.file.FileOperations;
 import org.gradle.api.tasks.Nested;
 import org.gradle.api.tasks.TaskAction;
 
 /** Stage App Engine app.yaml based applications for deployment. */
-public class StageAppYamlTask extends DefaultTask {
+public abstract class StageAppYamlTask extends DefaultTask {
+
+  @Inject
+  abstract public FileOperations getFileOperations();
 
   private StageAppYamlExtension appYamlExtension;
 
@@ -40,8 +45,8 @@ public class StageAppYamlTask extends DefaultTask {
   /** Task entrypoint : Stage the app.yaml based application. */
   @TaskAction
   public void stageAction() throws AppEngineException {
-    getProject().delete(appYamlExtension.getStagingDirectory());
-    getProject().mkdir(appYamlExtension.getStagingDirectory().getAbsolutePath());
+    getFileOperations().delete(appYamlExtension.getStagingDirectory());
+    getFileOperations().mkdir(appYamlExtension.getStagingDirectory().getAbsolutePath());
 
     AppYamlProjectStaging staging = new AppYamlProjectStaging();
     staging.stageArchive(appYamlExtension.toAppYamlProjectStageConfiguration());
