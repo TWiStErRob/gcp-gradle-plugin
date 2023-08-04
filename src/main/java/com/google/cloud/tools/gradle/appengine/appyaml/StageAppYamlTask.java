@@ -29,7 +29,7 @@ import org.gradle.api.tasks.TaskAction;
 public abstract class StageAppYamlTask extends DefaultTask {
 
   @Inject
-  abstract public FileOperations getFileOperations();
+  public abstract FileOperations getFileOperations();
 
   private StageAppYamlExtension appYamlExtension;
 
