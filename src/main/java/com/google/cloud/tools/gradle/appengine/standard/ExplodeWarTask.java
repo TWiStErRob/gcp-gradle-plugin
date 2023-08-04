@@ -18,16 +18,23 @@
 package com.google.cloud.tools.gradle.appengine.standard;
 
 import java.io.File;
+
+import javax.inject.Inject;
+
+import org.gradle.api.internal.file.FileOperations;
 import org.gradle.api.tasks.OutputDirectory;
 import org.gradle.api.tasks.Sync;
 
 /** Expand a war. */
-public class ExplodeWarTask extends Sync {
+public abstract class ExplodeWarTask extends Sync {
 
   private File explodedAppDirectory;
 
+  @Inject
+  public abstract FileOperations getFileOperations();
+
   public void setWarFile(File warFile) {
-    from(getProject().zipTree(warFile));
+    from(getFileOperations().zipTree(warFile));
   }
 
   /**

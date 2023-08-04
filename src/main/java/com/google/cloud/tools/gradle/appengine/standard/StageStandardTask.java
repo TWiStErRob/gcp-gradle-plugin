@@ -17,18 +17,24 @@
 
 package com.google.cloud.tools.gradle.appengine.standard;
 
+import javax.inject.Inject;
+
 import com.google.cloud.tools.appengine.AppEngineException;
 import com.google.cloud.tools.appengine.operations.AppCfg;
 import com.google.cloud.tools.gradle.appengine.core.CloudSdkOperations;
 import org.gradle.api.DefaultTask;
+import org.gradle.api.internal.file.FileOperations;
 import org.gradle.api.tasks.Nested;
 import org.gradle.api.tasks.TaskAction;
 
 /** Stage App Engine Standard Environment applications for deployment. */
-public class StageStandardTask extends DefaultTask {
+public abstract class StageStandardTask extends DefaultTask {
 
   private StageStandardExtension stageStandardExtension;
   private AppCfg appCfg;
+
+  @Inject
+  public abstract FileOperations getFileOperations();
 
   @Nested
   public StageStandardExtension getStageStandardExtension() {
@@ -46,7 +52,7 @@ public class StageStandardTask extends DefaultTask {
   /** Task entrypoint : stage the standard app. */
   @TaskAction
   public void stageAction() throws AppEngineException {
-    getProject().delete(stageStandardExtension.getStagingDirectory());
+    getFileOperations().delete(stageStandardExtension.getStagingDirectory());
     appCfg
         .newStaging(CloudSdkOperations.getDefaultHandler(getLogger()))
         .stageStandard(stageStandardExtension.toStageStandardConfiguration());

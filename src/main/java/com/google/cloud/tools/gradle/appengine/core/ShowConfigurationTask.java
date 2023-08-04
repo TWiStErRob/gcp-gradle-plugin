@@ -22,18 +22,32 @@ import com.google.common.base.Joiner;
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Map;
 import org.gradle.api.DefaultTask;
+import org.gradle.api.Task;
 import org.gradle.api.internal.plugins.ExtensionContainerInternal;
 import org.gradle.api.plugins.ExtensionAware;
 import org.gradle.api.tasks.Input;
 import org.gradle.api.tasks.TaskAction;
+import org.gradle.util.GradleVersion;
 
 /** Task to print the appengine configuration closure. */
 public class ShowConfigurationTask extends DefaultTask {
+
+  public ShowConfigurationTask() {
+    if (GradleVersion.current().getBaseVersion().compareTo(GradleVersion.version("7.4")) >= 0) {
+      String reason = "This task reads extensions dynamically based on a string, which requires usage of Project during @TaskAction. This cannot be made compatible without a breaking change in API unless setExtensionId is treated as internal API.";
+      try {
+        Task.class.getMethod("notCompatibleWithConfigurationCache").invoke(this, reason);
+      } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+        // Ignore. This is just a best-effort attempt to make the task work while CC is enabled.
+      }
+    }
+  }
 
   private String extensionId;
 
