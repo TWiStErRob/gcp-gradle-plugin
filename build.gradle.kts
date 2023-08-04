@@ -169,7 +169,7 @@ tasks.register<Sync>("prepareRelease") {
   from(tasks.named("javadocJar"))
   from(tasks.named("writePom"))
 
-  into("${buildDir}/release-artifacts")
+  into("${buildDir}/release-artifacts/com/google/cloud/tools/appengine-gradle-plugin/${project.version}/")
 
   dependsOn(tasks.build)
 }
