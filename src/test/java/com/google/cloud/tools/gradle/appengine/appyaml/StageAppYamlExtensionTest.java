@@ -27,6 +27,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.gradle.api.Project;
+import org.gradle.api.internal.file.FileOperations;
+import org.gradle.api.internal.project.ProjectInternal;
 import org.gradle.testfixtures.ProjectBuilder;
 import org.gradle.testkit.runner.BuildResult;
 import org.gradle.testkit.runner.TaskOutcome;
@@ -60,7 +62,9 @@ public class StageAppYamlExtensionTest {
 
   @Test
   public void testToAppYamlProjectStageConfiguration_allValuesSet() {
-    StageAppYamlExtension extension = new StageAppYamlExtension(testContextProject);
+    FileOperations fileOperations =
+        ((ProjectInternal) testContextProject).getServices().get(FileOperations.class);
+    StageAppYamlExtension extension = new StageAppYamlExtension(fileOperations);
 
     extension.setStagingDirectory(stagingDirectory);
     extension.setAppEngineDirectory(appEngineDirectory);
@@ -81,7 +85,9 @@ public class StageAppYamlExtensionTest {
 
   @Test
   public void testToAppYamlProjectStageConfiguration_nullExtraFiles() {
-    StageAppYamlExtension extension = new StageAppYamlExtension(testContextProject);
+    FileOperations fileOperations =
+        ((ProjectInternal) testContextProject).getServices().get(FileOperations.class);
+    StageAppYamlExtension extension = new StageAppYamlExtension(fileOperations);
 
     extension.setStagingDirectory(stagingDirectory);
     extension.setAppEngineDirectory(appEngineDirectory);
@@ -100,7 +106,9 @@ public class StageAppYamlExtensionTest {
 
   @Test
   public void testToAppYamlProjectStageConfiguration_emptyExtraFiles() {
-    StageAppYamlExtension extension = new StageAppYamlExtension(testContextProject);
+    FileOperations fileOperations =
+        ((ProjectInternal) testContextProject).getServices().get(FileOperations.class);
+    StageAppYamlExtension extension = new StageAppYamlExtension(fileOperations);
 
     extension.setStagingDirectory(stagingDirectory);
     extension.setAppEngineDirectory(appEngineDirectory);

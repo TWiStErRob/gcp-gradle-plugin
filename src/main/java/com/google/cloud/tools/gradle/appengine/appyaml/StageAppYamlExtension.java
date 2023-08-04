@@ -22,8 +22,8 @@ import com.google.cloud.tools.gradle.appengine.util.NullSafe;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import org.gradle.api.Project;
 import org.gradle.api.file.FileCollection;
+import org.gradle.api.internal.file.FileOperations;
 import org.gradle.api.tasks.InputDirectory;
 import org.gradle.api.tasks.InputFile;
 import org.gradle.api.tasks.InputFiles;
@@ -34,7 +34,7 @@ import org.gradle.api.tasks.OutputDirectory;
 /** Extension element to define Stage configurations for app.yaml base projects. */
 public class StageAppYamlExtension {
 
-  private final Project project;
+  private final FileOperations project;
 
   private File appEngineDirectory;
   private File dockerDirectory;
@@ -42,7 +42,7 @@ public class StageAppYamlExtension {
   private File stagingDirectory;
   private List<File> extraFilesDirectories;
 
-  public StageAppYamlExtension(Project project) {
+  public StageAppYamlExtension(FileOperations project) {
     this.project = project;
   }
 
@@ -90,7 +90,7 @@ public class StageAppYamlExtension {
     if (extraFilesDirectories == null) {
       return null;
     }
-    FileCollection files = project.files();
+    FileCollection files = project.immutableFiles();
     for (File directory : extraFilesDirectories) {
       files = files.plus(project.fileTree(directory));
     }
@@ -103,7 +103,8 @@ public class StageAppYamlExtension {
   }
 
   public void setExtraFilesDirectories(Object extraFilesDirectories) {
-    this.extraFilesDirectories = new ArrayList<>(project.files(extraFilesDirectories).getFiles());
+    this.extraFilesDirectories =
+        new ArrayList<>(project.immutableFiles(extraFilesDirectories).getFiles());
   }
 
   AppYamlProjectStageConfiguration toAppYamlProjectStageConfiguration() {

@@ -20,7 +20,7 @@ package com.google.cloud.tools.gradle.appengine.standard;
 import com.google.cloud.tools.appengine.configuration.AppEngineWebXmlProjectStageConfiguration;
 import com.google.cloud.tools.gradle.appengine.util.NullSafe;
 import java.io.File;
-import org.gradle.api.Project;
+import org.gradle.api.internal.file.FileOperations;
 import org.gradle.api.tasks.Input;
 import org.gradle.api.tasks.InputDirectory;
 import org.gradle.api.tasks.InputFile;
@@ -30,7 +30,7 @@ import org.gradle.api.tasks.OutputDirectory;
 /** Extension element to define Stage configurations for App Engine Standard Environments. */
 public class StageStandardExtension {
 
-  private final Project project;
+  private final FileOperations project;
 
   private File sourceDirectory;
   private File stagingDirectory;
@@ -46,7 +46,7 @@ public class StageStandardExtension {
   private String runtime;
 
   /** Constuctor. */
-  public StageStandardExtension(Project project) {
+  public StageStandardExtension(FileOperations project) {
     this.project = project;
   }
 

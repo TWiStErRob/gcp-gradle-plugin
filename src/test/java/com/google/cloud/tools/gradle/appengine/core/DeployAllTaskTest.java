@@ -30,6 +30,8 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import org.gradle.api.Project;
+import org.gradle.api.internal.file.FileOperations;
+import org.gradle.api.internal.project.ProjectInternal;
 import org.gradle.testfixtures.ProjectBuilder;
 import org.junit.Before;
 import org.junit.Rule;
@@ -61,7 +63,9 @@ public class DeployAllTaskTest {
   @Before
   public void setup() throws IOException {
     Project tempProject = ProjectBuilder.builder().build();
-    deployExtension = new DeployExtension(tempProject);
+    FileOperations fileOperations =
+        ((ProjectInternal) tempProject).getServices().get(FileOperations.class);
+    deployExtension = new DeployExtension(fileOperations);
     deployExtension.setDeployTargetResolver(deployTargetResolver);
     deployCapture = ArgumentCaptor.forClass(DeployConfiguration.class);
     stageDir = tempFolder.newFolder("staging");

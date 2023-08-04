@@ -29,14 +29,14 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import org.gradle.api.Project;
 import org.gradle.api.ProjectConfigurationException;
-import org.gradle.api.plugins.BasePlugin;
+import org.gradle.api.internal.file.FileOperations;
 
 /** Extension element to define Run configurations for App Engine Standard Environments. */
 public class RunExtension {
 
   @InternalProperty private DeployTargetResolver deployTargetResolver;
 
-  private final Project project;
+  private final FileOperations project;
   private int startSuccessTimeout;
   private String serverVersion;
 
@@ -55,7 +55,7 @@ public class RunExtension {
    *
    * @param project The gradle project.
    */
-  public RunExtension(Project project) {
+  public RunExtension(FileOperations project) {
     this.project = project;
   }
 
@@ -124,7 +124,7 @@ public class RunExtension {
   }
 
   public void setServices(Object services) {
-    this.services = new ArrayList<>(project.files(services).getFiles());
+    this.services = new ArrayList<>(project.immutableFiles(services).getFiles());
   }
 
   /**
@@ -132,7 +132,8 @@ public class RunExtension {
    * run/start to ensure {@code serviceProject} is built first.
    */
   public File projectAsService(String serviceProject) {
-    return projectAsService(project.getRootProject().project(serviceProject));
+    throw new UnsupportedOperationException("Has no access to current project");
+    //    return projectAsService(project.getRootProject().project(serviceProject));
   }
 
   /**
@@ -140,23 +141,24 @@ public class RunExtension {
    * run/start to ensure {@code serviceProject} is built first.
    */
   public File projectAsService(Project serviceProject) {
-    if (!serviceProject.equals(project)) {
-      project.evaluationDependsOn(serviceProject.getPath());
-    }
-    project
-        .getTasks()
-        .findByName(AppEngineStandardPlugin.RUN_TASK_NAME)
-        .dependsOn(serviceProject.getTasks().findByPath(BasePlugin.ASSEMBLE_TASK_NAME));
-    project
-        .getTasks()
-        .findByName(AppEngineStandardPlugin.START_TASK_NAME)
-        .dependsOn(serviceProject.getTasks().findByPath(BasePlugin.ASSEMBLE_TASK_NAME));
-    return serviceProject
-        .getTasks()
-        .findByName(AppEngineStandardPlugin.EXPLODE_WAR_TASK_NAME)
-        .getOutputs()
-        .getFiles()
-        .getSingleFile();
+    throw new UnsupportedOperationException("Has no access to current project");
+    //    if (!serviceProject.equals(project)) {
+    //      project.evaluationDependsOn(serviceProject.getPath());
+    //    }
+    //    project
+    //        .getTasks()
+    //        .findByName(AppEngineStandardPlugin.RUN_TASK_NAME)
+    //        .dependsOn(serviceProject.getTasks().findByPath(BasePlugin.ASSEMBLE_TASK_NAME));
+    //    project
+    //        .getTasks()
+    //        .findByName(AppEngineStandardPlugin.START_TASK_NAME)
+    //        .dependsOn(serviceProject.getTasks().findByPath(BasePlugin.ASSEMBLE_TASK_NAME));
+    //    return serviceProject
+    //        .getTasks()
+    //        .findByName(AppEngineStandardPlugin.EXPLODE_WAR_TASK_NAME)
+    //        .getOutputs()
+    //        .getFiles()
+    //        .getSingleFile();
   }
 
   public Map<String, String> getEnvironment() {

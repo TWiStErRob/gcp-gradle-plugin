@@ -26,9 +26,11 @@ import com.google.cloud.tools.gradle.appengine.core.DeployTask;
 import com.google.cloud.tools.gradle.appengine.core.ToolsExtension;
 import com.google.cloud.tools.gradle.appengine.util.GradleCompatibility;
 import java.io.File;
+import javax.inject.Inject;
 import org.gradle.api.GradleException;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
+import org.gradle.api.internal.file.FileOperations;
 import org.gradle.api.plugins.BasePlugin;
 import org.gradle.api.plugins.JavaPlugin;
 import org.gradle.api.plugins.WarPlugin;
@@ -36,7 +38,7 @@ import org.gradle.api.tasks.bundling.Jar;
 import org.gradle.api.tasks.bundling.War;
 
 /** Plugin definition for App Engine app.yaml based projects. */
-public class AppEngineAppYamlPlugin implements Plugin<Project> {
+public abstract class AppEngineAppYamlPlugin implements Plugin<Project> {
 
   public static final String APP_ENGINE_APP_YAML_TASK_GROUP = "App Engine app.yaml based projects";
   private static final String STAGE_TASK_NAME = "appengineStage";
@@ -47,12 +49,15 @@ public class AppEngineAppYamlPlugin implements Plugin<Project> {
   private AppEngineAppYamlExtension appengineExtension;
   private StageAppYamlExtension stageExtension;
 
+  @Inject
+  protected abstract FileOperations getFileOperations();
+
   @Override
   public void apply(Project project) {
     this.project = project;
     appengineExtension =
         project.getExtensions().create("appengine", AppEngineAppYamlExtension.class);
-    appengineExtension.createSubExtensions(project);
+    appengineExtension.createSubExtensions(getFileOperations());
 
     new AppEngineCorePluginConfiguration()
         .configureCoreProperties(

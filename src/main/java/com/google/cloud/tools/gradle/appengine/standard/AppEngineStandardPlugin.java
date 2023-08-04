@@ -28,15 +28,17 @@ import com.google.cloud.tools.gradle.appengine.core.ToolsExtension;
 import com.google.cloud.tools.gradle.appengine.util.GradleCompatibility;
 import com.google.common.base.Strings;
 import java.io.File;
+import javax.inject.Inject;
 import org.gradle.api.GradleException;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
+import org.gradle.api.internal.file.FileOperations;
 import org.gradle.api.plugins.BasePlugin;
 import org.gradle.api.plugins.WarPlugin;
 import org.gradle.api.tasks.bundling.War;
 
 /** Plugin definition for App Engine standard environments. */
-public class AppEngineStandardPlugin implements Plugin<Project> {
+public abstract class AppEngineStandardPlugin implements Plugin<Project> {
 
   public static final String APP_ENGINE_STANDARD_TASK_GROUP = "App Engine Standard environment";
   public static final String EXPLODE_WAR_TASK_NAME = "explodeWar";
@@ -59,13 +61,16 @@ public class AppEngineStandardPlugin implements Plugin<Project> {
   private StageStandardExtension stageExtension;
   private File explodedWarDir;
 
+  @Inject
+  protected abstract FileOperations getFileOperations();
+
   @Override
   public void apply(Project project) {
     this.project = project;
     project.getPluginManager().apply(WarPlugin.class);
     appengineExtension =
         project.getExtensions().create("appengine", AppEngineStandardExtension.class);
-    appengineExtension.createSubExtensions(project);
+    appengineExtension.createSubExtensions(getFileOperations());
 
     appEngineCorePluginConfiguration = new AppEngineCorePluginConfiguration();
     appEngineCorePluginConfiguration.configureCoreProperties(

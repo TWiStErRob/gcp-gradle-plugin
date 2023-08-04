@@ -22,7 +22,7 @@ import com.google.cloud.tools.gradle.appengine.core.DeployExtension;
 import com.google.cloud.tools.gradle.appengine.core.InternalProperty;
 import com.google.cloud.tools.gradle.appengine.core.ToolsExtension;
 import org.gradle.api.Action;
-import org.gradle.api.Project;
+import org.gradle.api.internal.file.FileOperations;
 import org.gradle.api.plugins.ExtensionAware;
 
 public class AppEngineAppYamlExtension implements AppEngineCoreExtensionProperties {
@@ -35,7 +35,7 @@ public class AppEngineAppYamlExtension implements AppEngineCoreExtensionProperti
   @InternalProperty private StageAppYamlExtension stage;
 
   /** Create nested configuration blocks as Extensions. */
-  public void createSubExtensions(Project project) {
+  public void createSubExtensions(FileOperations project) {
     tools =
         ((ExtensionAware) this).getExtensions().create(TOOLS_EXT, ToolsExtension.class, project);
     deploy =

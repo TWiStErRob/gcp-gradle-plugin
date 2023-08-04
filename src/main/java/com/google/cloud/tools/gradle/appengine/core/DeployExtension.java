@@ -23,7 +23,7 @@ import java.io.File;
 import java.nio.file.Path;
 import java.util.List;
 import org.gradle.api.GradleException;
-import org.gradle.api.Project;
+import org.gradle.api.internal.file.FileOperations;
 
 /** Extension element to define Deployable configurations for App Engine. */
 public class DeployExtension {
@@ -31,7 +31,7 @@ public class DeployExtension {
   @InternalProperty private DeployTargetResolver deployTargetResolver;
 
   // named gradleProject to disambiguate with deploy parameter "project"
-  private final Project gradleProject;
+  private final FileOperations gradleProject;
 
   private String bucket;
   private String gcloudMode;
@@ -44,7 +44,7 @@ public class DeployExtension {
   private String version;
   private File appEngineDirectory;
 
-  public DeployExtension(Project gradleProject) {
+  public DeployExtension(FileOperations gradleProject) {
     this.gradleProject = gradleProject;
   }
 
