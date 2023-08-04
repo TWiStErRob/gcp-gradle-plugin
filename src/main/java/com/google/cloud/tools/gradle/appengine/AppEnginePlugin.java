@@ -19,6 +19,7 @@ package com.google.cloud.tools.gradle.appengine;
 
 import com.google.cloud.tools.gradle.appengine.appyaml.AppEngineAppYamlPlugin;
 import com.google.cloud.tools.gradle.appengine.standard.AppEngineStandardPlugin;
+import com.google.cloud.tools.gradle.appengine.util.GradleCompatibility;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import org.gradle.api.GradleException;
@@ -33,8 +34,6 @@ import org.gradle.util.GradleVersion;
  * appengine-web.xml or app.yaml based build.
  */
 public class AppEnginePlugin implements Plugin<Project> {
-
-  private static final GradleVersion GRADLE_MIN_VERSION = GradleVersion.version("3.4.1");
 
   @Override
   public void apply(Project project) {
@@ -63,12 +62,12 @@ public class AppEnginePlugin implements Plugin<Project> {
   }
 
   private void checkGradleVersion() {
-    if (GRADLE_MIN_VERSION.compareTo(GradleVersion.current()) > 0) {
+    if (GradleCompatibility.getMinimumGradleVersion().compareTo(GradleVersion.current()) > 0) {
       throw new GradleException(
           "Detected "
               + GradleVersion.current()
               + ", but the appengine-gradle-plugin requires "
-              + GRADLE_MIN_VERSION
+              + GradleCompatibility.getMinimumGradleVersion()
               + " or higher.");
     }
   }
